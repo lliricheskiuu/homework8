@@ -35,8 +35,8 @@ print(e_mail)
 
 def generate_random_str(min_l, max_l):
     letters = string.ascii_lowercase
-    rand_str = ''.join(rnd.choice(letters) for i in range(min_l, max_l))
-    return rand_str
+    rnd_str = ''.join(rnd.choice(letters) for i in range(min_l, max_l))
+    return rnd_str
 
 
 min_lim = int(input("Enter min lim:"))
@@ -54,4 +54,59 @@ print(generate_random_str(min_lim, max_lim))
 # Под словом будем понимать набор случайных букв от одной до 10.
 # Большие буквы только в начале слов. Цифры не должны быть частями слов, а стоять отдельно.
 # Знаки препинания всегда идут в конце слова.
+
+
+def create_spaces(rnd_string):
+    index = 0
+    rnd_listed_str = list(rnd_string)
+    tmp = True
+    while tmp:
+        step = rnd.randint(1, 10)
+        index += step
+        if index < len(rnd_string):
+            rnd_listed_str[index] = ' '
+        else:
+            tmp = False
+    rnd_string = ''.join(rnd_listed_str)
+    return rnd_string
+
+
+def modify_word(word, chance=4):
+    if rnd.randint(1, 10) < chance:
+        word = word.capitalize()
+    if rnd.randint(1, 14) < chance:
+        word += ','
+    if rnd.randint(1, 14) < chance:
+        word += '\n'
+    return word
+
+
+def modify_word_into_digits(word, chance=4):
+    if rnd.randint(1, 20) < chance:
+        list_word = list(word)
+        list_word.clear()
+        for symbol in range(len(word)):
+            list_word.append(str(rnd.randint(1, 10)))
+        word = ''.join(list_word)
+    return word
+
+
+def modify_str(rnd_string):
+    rnd_split_str = rnd_string.split()
+    result = []
+    rnd_split_str[0] = rnd_split_str[0].capitalize()
+    rnd_split_str[-1] += '.'
+    result.append(rnd_split_str[0])
+    for word in rnd_split_str[1:-1]:
+        word = modify_word(word)
+        word = modify_word_into_digits(word)
+        result.append(word)
+    result.append(rnd_split_str[-1])
+    return " ".join(result)
+
+
+rnd_str = generate_random_str(0, 100)
+rnd_str = create_spaces(rnd_str)
+rnd_str = modify_str(rnd_str)
+print(" " + rnd_str)
 
