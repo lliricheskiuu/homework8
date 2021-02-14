@@ -8,6 +8,9 @@
 import random as rnd
 import string
 
+MIN = 100
+MAX = 999
+
 names = ['Zarechnuy', 'Sokolow', 'Ymanez']
 domains = ['com', 'ua', 'net']
 length = rnd.randint(5, 7)
@@ -20,7 +23,8 @@ def generate_rnd_str():
 
 
 def generate_rnd_mail(rnd_name, rnd_domain):
-    mail = f'{rnd_name[rnd.randint(0, 2)]}.{rnd.randint(100, 999)}@{generate_rnd_str()}.{rnd_domain[rnd.randint(0, 2)]}'
+    mail = f'{rnd_name[rnd.randint(0, len(rnd_name) - 1)]}.{rnd.randint(MIN, MAX)}@' \
+           f'{generate_rnd_str()}.{rnd_domain[rnd.randint(0, len(rnd_domain) - 1)]}'
     return mail
 
 
@@ -35,14 +39,15 @@ print(e_mail)
 
 def generate_random_str(min_l, max_l):
     letters = string.ascii_lowercase
-    rnd_str = ''.join(rnd.choice(letters) for i in range(min_l, max_l))
+    tmp = rnd.randint(min_l, max_l)
+    rnd_str = ''.join(rnd.choice(letters) for i in range(tmp))
     return rnd_str
 
 
-min_lim = int(input("Enter min lim:"))
-max_lim = int(input("Enter max lim:"))
-
-print(f"Your string:{generate_random_str(min_lim, max_lim)}")
+# min_lim = int(input("Enter min lim:"))
+# max_lim = int(input("Enter max lim:"))
+#
+# print(f"Your string:{generate_random_str(min_lim, max_lim)}")
 
 ###
 
@@ -108,5 +113,5 @@ def modify_str(rnd_string):
 rnd_str = generate_random_str(0, 100)
 rnd_str = create_spaces(rnd_str)
 rnd_str = modify_str(rnd_str)
-print(" " + rnd_str)
-
+# print(" " + rnd_str)
+print(rnd_str)  # в таком случае появляются непорятные отступы
