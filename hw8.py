@@ -19,12 +19,12 @@ def generate_rnd_str():
     return rand_str
 
 
-def generate_rnd_mail():
-    mail = f'{names[rnd.randint(0, 2)]}.{rnd.randint(100, 999)}@{generate_rnd_str()}.{domains[rnd.randint(0, 2)]}'
+def generate_rnd_mail(rnd_name, rnd_domain):
+    mail = f'{rnd_name[rnd.randint(0, 2)]}.{rnd.randint(100, 999)}@{generate_rnd_str()}.{rnd_domain[rnd.randint(0, 2)]}'
     return mail
 
 
-e_mail = generate_rnd_mail()
+e_mail = generate_rnd_mail(names, domains)
 print(e_mail)
 
 ###
@@ -42,7 +42,7 @@ def generate_random_str(min_l, max_l):
 min_lim = int(input("Enter min lim:"))
 max_lim = int(input("Enter max lim:"))
 
-print(generate_random_str(min_lim, max_lim))
+print(f"Your string:{generate_random_str(min_lim, max_lim)}")
 
 ###
 
