@@ -8,22 +8,21 @@
 import random as rnd
 import string
 
-MIN = 100
-MAX = 999
+MIN, MAX = 100, 999
 
-names = ['Zarechnuy', 'Sokolow', 'Ymanez']
+names = ['Kirill', 'Anna', 'Jacob']
 domains = ['com', 'ua', 'net']
 length = rnd.randint(5, 7)
 
 
-def generate_rnd_str():
+def generate_rnd_str() -> str:
     letters = string.ascii_lowercase
-    rand_str = ''.join(rnd.choice(letters) for i in range(length))
-    return rand_str
+    random_str = ''.join(rnd.choice(letters) for i in range(length))
+    return random_str
 
 
 def generate_rnd_mail(rnd_name, rnd_domain):
-    mail = f'{rnd_name[rnd.randint(0, len(rnd_name) - 1)]}.{rnd.randint(MIN, MAX)}@' \
+    mail = f'1) {rnd_name[rnd.randint(0, len(rnd_name) - 1)]}.{rnd.randint(MIN, MAX)}@' \
            f'{generate_rnd_str()}.{rnd_domain[rnd.randint(0, len(rnd_domain) - 1)]}'
     return mail
 
@@ -37,17 +36,17 @@ print(e_mail)
 # Минимальную и максимальную длину строки ограничить с помощью параметров min_limit, max_limit, передаваемых в функцию.
 
 
-def generate_random_str(min_l, max_l):
+def generate_rnd_str_with_limits(min_l: int, max_l: int) -> str:
     letters = string.ascii_lowercase
-    tmp = rnd.randint(min_l, max_l)
-    rnd_str = ''.join(rnd.choice(letters) for i in range(tmp))
-    return rnd_str
+    rnd_int = rnd.randint(min_l, max_l)
+    random_str = ''.join(rnd.choice(letters) for i in range(rnd_int))
+    return random_str
 
 
-# min_lim = int(input("Enter min lim:"))
-# max_lim = int(input("Enter max lim:"))
-#
-# print(f"Your string:{generate_random_str(min_lim, max_lim)}")
+min_lim = int(input("\nEnter min lim:"))
+max_lim = int(input("Enter max lim:"))
+
+print(f"\n2) Your string:\n{generate_rnd_str_with_limits(min_lim, max_lim)}")
 
 ###
 
@@ -61,7 +60,7 @@ def generate_random_str(min_l, max_l):
 # Знаки препинания всегда идут в конце слова.
 
 
-def create_spaces(rnd_string):
+def create_spaces(rnd_string: str) -> str:
     index = 0
     rnd_listed_str = list(rnd_string)
     tmp = True
@@ -76,7 +75,7 @@ def create_spaces(rnd_string):
     return rnd_string
 
 
-def modify_word(word, chance=4):
+def modify_word(word: str, chance=4) -> str:
     if rnd.randint(1, 10) < chance:
         word = word.capitalize()
     if rnd.randint(1, 14) < chance:
@@ -86,7 +85,7 @@ def modify_word(word, chance=4):
     return word
 
 
-def modify_word_into_digits(word, chance=4):
+def modify_word_into_digits(word: str, chance=4) -> str:
     if rnd.randint(1, 20) < chance:
         list_word = list(word)
         list_word.clear()
@@ -96,7 +95,7 @@ def modify_word_into_digits(word, chance=4):
     return word
 
 
-def modify_str(rnd_string):
+def modify_str(rnd_string: str) -> str:
     rnd_split_str = rnd_string.split()
     result = []
     rnd_split_str[0] = rnd_split_str[0].capitalize()
@@ -110,8 +109,8 @@ def modify_str(rnd_string):
     return " ".join(result)
 
 
-rnd_str = generate_random_str(0, 100)
+rnd_str = generate_rnd_str_with_limits(0, 100)
 rnd_str = create_spaces(rnd_str)
 rnd_str = modify_str(rnd_str)
-# print(" " + rnd_str)
-print(rnd_str)  # в таком случае появляются непорятные отступы
+
+print(f"\n3) Result:\n {rnd_str}")
